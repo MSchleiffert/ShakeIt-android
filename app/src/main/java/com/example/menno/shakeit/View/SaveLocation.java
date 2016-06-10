@@ -56,8 +56,9 @@ public class SaveLocation extends AppCompatActivity {
         EditText etLocationName = (EditText) findViewById(R.id.locationName);
 
         try {
-            ApiStrategy saveLocation = new SaveLocationStrat(etLocationName.getText().toString(), etLongitude.getText().toString(), etLatitude.getText().toString());
+            ApiStrategy saveLocation = new SaveLocationStrat(Globals.userId, etLocationName.getText().toString(), etLongitude.getText().toString(), etLatitude.getText().toString());
             controller.setStrategy(saveLocation);
+            controller.executeStrategy();
         } catch (JSONException e) {
             e.printStackTrace();
         }

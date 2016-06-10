@@ -47,6 +47,7 @@ public class Register extends AppCompatActivity {
             try {
                 ApiStrategy registerUser = new SaveRegistration(userName.getText().toString(), password.getText().toString());
                 controller.setStrategy(registerUser);
+                controller.executeStrategy();
             } catch (JSONException e) {
                 e.printStackTrace();
             }

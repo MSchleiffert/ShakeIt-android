@@ -18,7 +18,7 @@ import java.net.URL;
  * Created by Menno on 9-6-2016.
  */
 public class ExecuteAsync extends AsyncTask<String, String, String> {
-    public final static String apiURL = "http://83.81.49.19/";
+    public final static String apiURL = "http://dhb.jeroenkraan.eu/shakeit/api.php";
 
     private Activity activeActivity;
     private ApiStrategy activeStrategy;
@@ -70,6 +70,7 @@ public class ExecuteAsync extends AsyncTask<String, String, String> {
         } catch (Exception e) {
 
             System.out.println(e.getMessage());
+            Log.d("asyncERR", e.getMessage());
 
             return e.getMessage();
 

@@ -22,13 +22,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.menno.shakeit.Connector.ApiStrategy;
+import com.example.menno.shakeit.Connector.ExecuteAsync;
+import com.example.menno.shakeit.Connector.GetLocationList;
 import com.example.menno.shakeit.Models.Globals;
 import com.example.menno.shakeit.View.GetRandom;
 import com.example.menno.shakeit.View.Login;
 import com.example.menno.shakeit.View.SaveLocation;
 
-public class MainActivity extends AppCompatActivity implements ShakeEvent.ShakeListener {
+public class MainActivity extends AppCompatActivity implements ShakeEvent.ShakeListener, VariableChangeListener {
     private ShakeEvent sd;
+    private ExecuteAsync controller = new ExecuteAsync();
 
 
     @Override
@@ -37,6 +41,9 @@ public class MainActivity extends AppCompatActivity implements ShakeEvent.ShakeL
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Globals global = Globals.getInstance();
+        global.setVariableChangeListener(MainActivity.this);
 
         if(!Globals.loggedin){
             Intent intent = new Intent(MainActivity.this, Login.class);
@@ -108,4 +115,14 @@ public class MainActivity extends AppCompatActivity implements ShakeEvent.ShakeL
         Intent intent = new Intent(MainActivity.this, GetRandom.class);
         startActivity(intent);
     }
+
+
+    @Override
+    public void onVariableChanged(int userId) {
+        ApiStrategy getList = new GetLocationList(userId);
+        controller.setStrategy(getList);
+        controller.executeStrategy();
+    }
 }
+
+

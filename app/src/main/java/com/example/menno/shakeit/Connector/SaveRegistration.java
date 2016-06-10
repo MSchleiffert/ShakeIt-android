@@ -29,7 +29,7 @@ public class SaveRegistration implements ApiJSONStrategy {
 
     @Override
     public String executeStrategy() {
-        return "/register";
+        return "/login/false";
     }
 
     @Override

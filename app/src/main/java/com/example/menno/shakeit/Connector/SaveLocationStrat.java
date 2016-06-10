@@ -10,9 +10,11 @@ import org.json.JSONObject;
  */
 public class SaveLocationStrat implements ApiJSONStrategy {
     JSONObject jsonObject = new JSONObject();
+    int userid;
 
-    public SaveLocationStrat(String locationName, String longitude, String latitude) throws JSONException {
-        jsonObject.put("location_name", locationName);
+    public SaveLocationStrat(int userId, String locationName, String longitude, String latitude) throws JSONException {
+        this.userid = userId;
+        jsonObject.put("name", locationName);
         jsonObject.put("longitude", longitude);
         jsonObject.put("latitude", latitude);
     }
@@ -29,7 +31,7 @@ public class SaveLocationStrat implements ApiJSONStrategy {
 
     @Override
     public String executeStrategy() {
-        return "/saveLocation";
+        return "/geo/save/" + this.userid;
     }
 
     @Override
